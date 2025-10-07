@@ -7,35 +7,28 @@
 ## Main Idea
 
 ```mermaid
-%%{init: {'theme': 'base'}}%%
 graph TD
-  %% v1.0 installation
-  subgraph Install v1.0
-    A[Build .wic + .swu files] --> B[Initial setup]
-    B --> C[Flash .wic to SD card]
-    C --> D[Boot device]
-    D --> E[Device running v1.0]
-  end
-
-  %% Update to v2.0
-  subgraph Update to v2.0 via SWUpdate
-    F[Build new version] --> G[Generate new .swu]
-    G --> H[Transfer .swu to device]
-    H --> I[Run: swupdate -i new.swu]
-    I --> J[Reboot to updated system]
-    J --> K[Device running v2.0]
-  end
-
-  %% Styling for readability in light/dark modes
-  classDef normal fill:#f5f7fa,stroke:#4b5563,stroke-width:1px,color:#111827;
-  classDef success fill:#d1fae5,stroke:#047857,color:#064e3b;
-  classDef caution fill:#fde68a,stroke:#b45309,color:#7c2d12;
-  classDef info fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a;
-
-  class A,B,D,E,F,G,H,J normal;
-  class C success;      %% Flash step (green)
-  class I caution;      %% Command step (amber)
-  class K info;         %% Final state (blue)
+  A[Build .wic + .swu files] --> B[Initial setup]
+  B --> C[Flash .wic to SD card]
+  C --> D[Boot device]
+  D --> E[Device running v1.0]
+  
+  E -.-> F[Build new version]
+  F --> G[Generate new .swu]
+  G --> H[Transfer .swu to device]
+  H --> I[Run: swupdate -i new.swu]
+  I --> J[Reboot to updated system]
+  J --> K[Device running v2.0]
+  
+  classDef initial fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef flash fill:#d1fae5,stroke:#047857,stroke-width:2px,color:#064e3b
+  classDef update fill:#fde68a,stroke:#b45309,stroke-width:2px,color:#7c2d12
+  classDef running fill:#e9d5ff,stroke:#7c3aed,stroke-width:2px,color:#5b21b6
+  
+  class A,B initial
+  class C,D flash
+  class F,G,H,I,J update
+  class E,K running
 ```
 
 ## Location of build result
