@@ -165,11 +165,14 @@ If an update fails:
 ## Build Output Locations
 After building with ./kas-container build kas-iot2050-swupdate.yml:<youroption>.yml:
 
+```
 build/tmp/deploy/images/iot2050/
 ├── iot2050-image-swu-example-iot2050-debian-iot2050.wic      ← Initial installation
 ├── iot2050-image-swu-example-iot2050-debian-iot2050.swu      ← Updates
 ├── iot2050-image-swu-example-iot2050-debian-iot2050.wic.bmap ← Block map for bmaptool
 └── iot2050-image-swu-example-iot2050-debian-iot2050.wic.img  ← Symlink to .wic
+
+```
 
 ## Quick Reference
 
