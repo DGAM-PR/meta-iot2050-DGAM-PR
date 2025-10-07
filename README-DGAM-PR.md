@@ -7,28 +7,38 @@
 ## Main Idea
 
 ```mermaid
-graph TD
-  A[Build .wic + .swu files] --> B[Initial setup]
-  B --> C[Flash .wic to SD card]
-  C --> D[Boot device]
-  D --> E[Device running v1.0]
-  
-  E -.-> F[Build new version]
-  F --> G[Generate new .swu]
-  G --> H[Transfer .swu to device]
-  H --> I[Run: swupdate -i new.swu]
-  I --> J[Reboot to updated system]
-  J --> K[Device running v2.0]
-  
-  classDef initial fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
-  classDef flash fill:#d1fae5,stroke:#047857,stroke-width:2px,color:#064e3b
-  classDef update fill:#fde68a,stroke:#b45309,stroke-width:2px,color:#7c2d12
-  classDef running fill:#e9d5ff,stroke:#7c3aed,stroke-width:2px,color:#5b21b6
-  
-  class A,B initial
-  class C,D flash
-  class F,G,H,I,J update
-  class E,K running
+flowchart TD
+
+  %% --- Workflow 1: Install v1.0 ---
+  subgraph V1["Install v1.0"]
+    direction TB
+    A[Build .wic + .swu files]:::build --> B[Initial setup]:::normal
+    B --> C[Flash .wic to SD card]:::flash
+    C --> D[Boot device]:::normal
+    D --> E[Device running v1.0]:::state
+  end
+
+  %% --- Workflow 2: Update to v2.0 ---
+  subgraph V2["Update to v2.0 (SWUpdate)"]
+    direction TB
+    F[Build new version]:::build --> G[Generate new .swu]:::normal
+    G --> H[Transfer .swu to device]:::normal
+    H --> I[Run: swupdate -i new.swu]:::action
+    I --> J[Reboot to updated system]:::normal
+    J --> K[Device running v2.0]:::state2
+  end
+
+  %% Optional: show that these are independent by NOT connecting V1 and V2
+  %% If you want a light hint of relation without merging flows, uncomment:
+  %% E -. reference only .-> F
+
+  %% Styles for readability in light/dark GitHub themes
+  classDef build fill:#dbeafe,stroke:#1d4ed8,stroke-width:1.5px,color:#0b3b8a;
+  classDef normal fill:#f5f7fa,stroke:#4b5563,stroke-width:1.5px,color:#111827;
+  classDef flash fill:#dcfce7,stroke:#047857,stroke-width:1.5px,color:#064e3b;
+  classDef action fill:#fef3c7,stroke:#b45309,stroke-width:1.5px,color:#7c2d12;
+  classDef state fill:#e5e7eb,stroke:#374151,stroke-width:1.5px,color:#111827;
+  classDef state2 fill:#e0f2fe,stroke:#0369a1,stroke-width:1.5px,color:#0c4a6e;
 ```
 
 ## Location of build result
