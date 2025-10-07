@@ -19,7 +19,7 @@ flowchart TD
   end
 
   %% --- Workflow 2: Update IO Device ---
-  subgraph V2["Update IOT Device (SWUpdate)"]
+  subgraph V2["SWupdate process"]
     direction TB
     F[Build new version]:::build --> G[Generate new .swu]:::normal
     G --> H[Transfer .swu to device]:::normal
