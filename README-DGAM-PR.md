@@ -1,8 +1,15 @@
 # GDAM-PR Additional Info
 
-- Added kas/opt/pro-rail.yml
+- Added kas/opt/gdam-pr.yml
 - Use following command within this repo's highest directory dept
     - ` ./kas-container build kas-iot2050-swupdate.yml:./kas/opt/dgam-pr.yml`
+
+## Start clean
+To clean after you have performed a build, perform the below command:
+
+```
+./kas-container --isar clean
+```
 
 ## Main Idea
 
