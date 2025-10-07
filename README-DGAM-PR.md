@@ -9,8 +9,8 @@
 ```mermaid
 flowchart TD
 
-  %% --- Workflow 1: Install v1.0 ---
-  subgraph V1["Install v1.0"]
+  %% --- Workflow 1: Initial IOT Device Install ---
+  subgraph V1["Initial IOT Device Install"]
     direction TB
     A[Build .wic + .swu files]:::build --> B[Initial setup]:::normal
     B --> C[Flash .wic to SD card]:::flash
@@ -18,8 +18,8 @@ flowchart TD
     D --> E[Device running v1.0]:::state
   end
 
-  %% --- Workflow 2: Update to v2.0 ---
-  subgraph V2["Update to v2.0 (SWUpdate)"]
+  %% --- Workflow 2: Update IO Device ---
+  subgraph V2["Update IOT Device (SWUpdate)"]
     direction TB
     F[Build new version]:::build --> G[Generate new .swu]:::normal
     G --> H[Transfer .swu to device]:::normal
