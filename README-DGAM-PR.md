@@ -4,6 +4,14 @@
 - Use following command within this repo's highest directory dept
     - ` ./kas-container build kas-iot2050-swupdate.yml:./kas/opt/dgam-pr.yml`
 
+## Copy via SCP from build server
+
+Hereby an example on how to copy the file from the buildserver to your machine over ssh:
+
+1. Create DIR on server you are gathering the foles on: `mkdir ~/images`
+2. Perform SSH Copy: `scp <username>@<buildserverip>:repos/meta-iot2050-DGAM-PR/build/tmp/deploy/images/iot2050/iot2050-image-swu-example-iot2050-debian-iot2050.{wic,swu} ~/images/` . You might have to put in your password for each file.
+3. Your files should be on the server or machine you ssh'd from
+
 ## Start clean
 To clean after you have performed a build, perform the below command:
 
