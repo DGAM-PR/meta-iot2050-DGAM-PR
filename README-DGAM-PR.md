@@ -90,18 +90,17 @@ File Extension	Purpose	When to Use
 
 ## Initial Installation
 
-- Use the .wic file for first-time setup:
-```
-# Flash to SD card
-sudo dd if=build/tmp/deploy/images/iot2050/iot2050-image-swu-example-iot2050-debian-iot2050.wic \
-        of=/dev/mmcblk0 bs=4M oflag=sync
-
-OR
-
-# Use an Application like BalenaEtcher that supports .wic files
-```
-- Insert the SD card into your IOT2050 device and boot.
-- Move SD Cart content to EMMC.
+1. Flash Sevice Stick image to sd card
+2. Inject SD card into Siemens IOT2050 device, this should boot to linux
+  1. Default Password is root/root
+3. In Linux mount /sda/sda1 to /tmp/usb
+	1. Create Dir: `sudo mkdir -p /tmp/usb`
+	2. Mount Dir: `sudo mount -t ext4 /dev/sda1 /tmp/usb`
+	3. CD into /tmp/usb with `cd /tmp usb`
+4. Flash from USB to EMMC (This can take a while)
+	1. Run `sudo dd if=/path/to/new-image.wic of=/dev/mmcblk1 bs=4M status=progress conv=fsync`
+	2. For Example: `sudo dd if=./iot2050-image-swu-example-iot2050-debian-iot2050.wic of=/dev/mmcblk1 bs=4M status=progress conv=fsync`
+5. Then reboot `sudo reboot`
 
 ## System Updates
 
@@ -211,3 +210,31 @@ build/tmp/deploy/images/iot2050/
 - Update fails: Device automatically rolls back on next reboot
 - System won't boot: Remove power, reinsert - should boot previous version
 - Want to rollback: Simply reboot without running complete_update.sh
+
+#### Check your image locally
+
+Mount your image locally by doing the following:
+
+1. Mount the Image: `sudo losetup -fP iot2050-image-swu-example-iot2050-advanced.wic`
+2. Check what loop was added, probably loop 0 by doing `lsblk`
+3. Create Dir to mount on `mkdir -p /mnt/yourimage`
+4. Mount the pratition you want to check: `sudo mount /dev/loop0p2 /mnt/yourimage`
+5. Your Image is now mounted at `/mnt/yourimage`
+6. Cleanup by doing 
+  - `sudo umount /dev/loop0p2 /mnt/yourimage`
+  - `sudo losetup -d /dev/loop0`
+
+#### Clear/Clean the EMMC from IT2050
+
+1. Check the EMMC, should be 1 (0 = Flash) by `mmc list`
+2. Select EMMC 1 by `mmc dev 1`
+3. TO DO...
+
+# U-Boot
+
+U-Boot is a popular open-source bootloader used in embedded Linux systems, responsible for initializing hardware and loading the operating system kernel. It supports various architectures and can boot from multiple devices like SD cards and USB drives.
+
+Check and read: recipes-bsp/u-boot/README.md
+
+Docs U-Boot: https://docs.u-boot.org/en/latest/
+Specific Docs: https://docs.u-boot.org/en/latest/board/siemens/iot2050.html#
