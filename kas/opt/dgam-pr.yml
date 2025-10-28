@@ -4,5 +4,4 @@ header:
 local_conf_header:
   minimal: |
     IOT2050_NODE_RED_SUPPORT = "0"
-    IMAGE_INSTALL:remove = "tcf-agent"
     IOT2050_DEBIAN_DEBUG_PACKAGES:remove = "mosquitto mosquitto-clients"
