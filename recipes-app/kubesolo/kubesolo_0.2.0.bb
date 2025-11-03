@@ -12,11 +12,11 @@ SRC_URI = "https://github.com/portainer/kubesolo/releases/download/v${KUBESOLO_V
 
 SRC_URI[sha256sum] = "020b9951d1285df5ad484786098a98e95a68e209456c1be4aeaff81681070f66"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/git"
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 ${S}/kubesolo ${D}${bindir}/kubesolo
+    install -m 0755 ${WORKDIR}/kubesolo ${D}${bindir}/kubesolo
 }
 
 FILES:${PN} = "${bindir}/kubesolo"
