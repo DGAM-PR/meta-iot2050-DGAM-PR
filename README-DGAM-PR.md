@@ -96,14 +96,30 @@ Create a specific build for IOT2 that will run docker/kubesolo to manage it's co
 - See [kas/opt/dgam-pr.yml] (kas/opt/dgam-pr.yml) for the specifcs on what we disabe or install
 - See this directory for kubesolo .bb [Recipes-app/kubesolo](recipes-app/kubesolo)
 
-### KubeSolo Data Storage Requirements
-KubeSolo needs to write to:
+### Filesystem Layout IOT2050
+KubeSolo needs to write to writable Overlay Directories only. This is why you need to install the exec during image build.
 
+```
 /var/lib/kubesolo - Cluster data, certificates, configs
 /var/log - Log files
 /etc/kubesolo - Configuration files
 /tmp - Temporary files
+```
 
+Filesystem Layout:
+```
+┌─────────────────────────────────────────┐
+│ Read-Only Root (/)                      │
+│ - /usr/bin/kubesolo ← Binary lives here │ ✅ Executable
+│ - /bin, /lib, /etc (base)               │
+├─────────────────────────────────────────┤
+│ Writable Overlay Directories            │
+│ - /var ← KubeSolo data storage          │ ✅ Writable
+│ - /etc ← Configuration files            │ ✅ Writable
+│ - /tmp ← Temporary files                │ ✅ Writable
+│ - /home ← User data                     │ ✅ Writable
+└─────────────────────────────────────────┘
+```
 
 # IOT2050 SWUpdate Usage Guide
 
