@@ -93,6 +93,9 @@ Create a specific build for IOT2 that will run docker/kubesolo to manage it's co
 
 `./kas-container build kas-iot2050-swupdate.yml:./kas/opt/dgam-pr.yml`
 
+- See [kas/opt/dgam-pr.yml] (kas/opt/dgam-pr.yml) for the specifcs on what we disabe or install
+- See this directory for kubesolo .bb [Recipes-app/kubesolo](recipes-app/kubesolo)
+
 
 # IOT2050 SWUpdate Usage Guide
 
