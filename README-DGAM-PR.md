@@ -77,6 +77,22 @@ build/
 ## Flash to SD Card (or use Balena Etcher)
 sudo dd if=build/tmp/deploy/images/iot2050/iot2050-image-swu-example-iot2050-debian-iot2050.wic of=/dev/mmcblk0 bs=4M oflag=sync
 
+# Two Types of Images as per archictecture
+
+See internal archiceture repo for fore information.
+
+## PLC Facing IOT1
+
+Simply perform the default swupdate build without any (opt) additional options
+`./kas-container build kas-iot2050-swupdate.yml`
+
+
+## Internet Facing IOT2
+
+Create a specific build for IOT2 that will run docker/kubesolo to manage it's containers in order to collect data
+
+`./kas-container build kas-iot2050-swupdate.yml:./kas/opt/dgam-pr.yml`
+
 
 # IOT2050 SWUpdate Usage Guide
 
