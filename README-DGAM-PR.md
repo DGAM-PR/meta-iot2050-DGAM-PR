@@ -96,7 +96,7 @@ File Extension	Purpose	When to Use
 3. In Linux mount /sda/sda1 to /tmp/usb
 	1. Create Dir: `sudo mkdir -p /tmp/usb`
 	2. Mount Dir: `sudo mount -t ext4 /dev/sda1 /tmp/usb`
-	3. CD into /tmp/usb with `cd /tmp usb`
+	3. CD into /tmp/usb with `cd /tmp/usb`
 4. Flash from USB to EMMC (This can take a while)
 	1. Run `sudo dd if=/path/to/new-image.wic of=/dev/mmcblk1 bs=4M status=progress conv=fsync`
 	2. For Example: `sudo dd if=./iot2050-image-swu-example-iot2050-debian-iot2050.wic of=/dev/mmcblk1 bs=4M status=progress conv=fsync`
@@ -229,6 +229,11 @@ Mount your image locally by doing the following:
 1. Check the EMMC, should be 1 (0 = Flash) by `mmc list`
 2. Select EMMC 1 by `mmc dev 1`
 3. TO DO...
+
+#### Mount SD Card if EFI does not work
+
+1. Load bootpartition for example 0:2 -> `load mmc 0:2 ${kernel_addr_r} linux.efi`
+2. Boot that partition `bootefi ${kernel_addr_r}${fdtcontroladdr}`
 
 # U-Boot
 
