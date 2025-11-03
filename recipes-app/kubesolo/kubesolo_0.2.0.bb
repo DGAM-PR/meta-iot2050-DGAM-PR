@@ -19,7 +19,8 @@ do_install() {
 FILES:${PN} = "${bindir}/kubesolo"
 
 # Runtime dependencies required by KubeSolo
-RDEPENDS:${PN} = "iptables libsqlite3-dev"
+# Use correct Debian package names
+RDEPENDS:${PN} = "iptables libsqlite3-0"
 
 # Prevent Docker from being installed alongside KubeSolo
 RCONFLICTS:${PN} = "docker"
