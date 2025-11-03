@@ -79,7 +79,7 @@ sudo dd if=build/tmp/deploy/images/iot2050/iot2050-image-swu-example-iot2050-deb
 
 # Two Types of Images as per archictecture
 
-See internal archiceture repo for fore information.
+See internal archiceture repo for more information.
 
 ## PLC Facing IOT1
 
