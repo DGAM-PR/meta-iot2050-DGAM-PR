@@ -96,6 +96,14 @@ Create a specific build for IOT2 that will run docker/kubesolo to manage it's co
 - See [kas/opt/dgam-pr.yml] (kas/opt/dgam-pr.yml) for the specifcs on what we disabe or install
 - See this directory for kubesolo .bb [Recipes-app/kubesolo](recipes-app/kubesolo)
 
+### KubeSolo Data Storage Requirements
+KubeSolo needs to write to:
+
+/var/lib/kubesolo - Cluster data, certificates, configs
+/var/log - Log files
+/etc/kubesolo - Configuration files
+/tmp - Temporary files
+
 
 # IOT2050 SWUpdate Usage Guide
 
