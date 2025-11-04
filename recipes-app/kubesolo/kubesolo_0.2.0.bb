@@ -10,11 +10,12 @@ inherit dpkg-raw
 DPKG_ARCH = "arm64"
 
 # ARM64 release for IOT2050
-SRC_URI = "https://github.com/portainer/kubesolo/releases/download/v${PV}/kubesolo-v${PV}-linux-arm64.tar.gz"
-
-SRC_URI[sha256sum] = "020b9951d1285df5ad484786098a98e95a68e209456c1be4aeaff81681070f66"
+SRC_URI = "https://github.com/portainer/kubesolo/releases/download/v${PV}/kubesolo-v${PV}-linux-arm64.tar.gz;sha256sum=020b9951d1285df5ad484786098a98e95a68e209456c1be4aeaff81681070f66"
 
 S = "${WORKDIR}/git"
+
+prefix = "/usr"
+bindir = "${prefix}/bin"
 
 do_install() {
     install -d ${D}${bindir}
