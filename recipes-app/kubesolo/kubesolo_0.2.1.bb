@@ -18,6 +18,9 @@ prefix = "/usr"
 bindir = "${prefix}/bin"
 localbin = "${prefix}/local/bin"
 
+# Override dh_usrlocal to handle symlinks in /usr/local
+DEBIAN_RULES_EXTRA = "override_dh_usrlocal:\n\t# Skip dh_usrlocal checks for symlinks\n"
+
 do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${WORKDIR}/kubesolo ${D}${bindir}/kubesolo
