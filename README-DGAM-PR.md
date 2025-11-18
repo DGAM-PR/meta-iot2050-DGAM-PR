@@ -276,7 +276,7 @@ Mount your image locally by doing the following:
 #### Mount SD Card if EFI does not work
 
 1. Load bootpartition for example 0:2 -> `load mmc 0:2 ${kernel_addr_r} linux.efi`
-2. Boot that partition `bootefi ${kernel_addr_r}${fdtcontroladdr}`
+2. Boot that partition `bootefi ${kernel_addr_r}{fdtcontroladdr}`
 
 # U-Boot
 
