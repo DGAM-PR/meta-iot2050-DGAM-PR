@@ -10,19 +10,24 @@ inherit dpkg-raw
 DPKG_ARCH = "arm64"
 
 # ARM64 release for IOT2050
-SRC_URI = "https://github.com/portainer/kubesolo/releases/download/v${PV}/kubesolo-v${PV}-linux-arm64.tar.gz;sha256sum=020b9951d1285df5ad484786098a98e95a68e209456c1be4aeaff81681070f66"
+SRC_URI = "https://github.com/portainer/kubesolo/releases/download/v${PV}/kubesolo-v${PV}-linux-arm64.tar.gz;sha256sum=4026d3eb77c39cf1087f525d4ad222f964e53e9739f4486b126811c8c4684cf7"
 
 S = "${WORKDIR}/git"
 
 prefix = "/usr"
 bindir = "${prefix}/bin"
+localbin = "${prefix}/local/bin"
 
 do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${WORKDIR}/kubesolo ${D}${bindir}/kubesolo
+    
+    # Create symlink for runc compatibility
+    install -d ${D}${localbin}
+    ln -sf /usr/sbin/runc ${D}${localbin}/runc
 }
 
-FILES:${PN} = "${bindir}/kubesolo"
+FILES:${PN} = "${bindir}/kubesolo ${localbin}/runc"
 
 DEBIAN_DEPENDS = "iptables, libsqlite3-0"
 RCONFLICTS:${PN} = "docker"
