@@ -4,4 +4,4 @@ isar/
 recipes-core/customizations-base/local.inc
 .config.yaml*
 .kas_shell_history
-./recipes-app/kubesolo/files/*
+recipes-app/kubesolo/files/kubesolo-linux-arm64.zip
