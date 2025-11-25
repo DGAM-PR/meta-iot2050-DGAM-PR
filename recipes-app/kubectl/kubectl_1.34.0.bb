@@ -13,7 +13,7 @@ DPKG_ARCH = "arm64"
 ## More info: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 SRC_URI = "https://dl.k8s.io/release/v${PV}/bin/linux/arm64/kubectl;sha256sum=00b182d103a8a73da7a4d11e7526d0543dcf352f06cc63a1fde25ce9243f49a0"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/src"
 
 prefix = "/usr"
 bindir = "${prefix}/bin"
