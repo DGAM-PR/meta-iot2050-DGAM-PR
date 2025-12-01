@@ -1,0 +1,7 @@
+#!/bin/sh
+# Reload systemd to pick up the var.mount override
+systemctl daemon-reload
+
+# Note: /var will be remounted with new options on next boot
+# or you can force remount now (but be careful with running services)
+# systemctl restart var.mount
