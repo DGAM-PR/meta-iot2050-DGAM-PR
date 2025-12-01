@@ -1,2 +1,0 @@
-# /etc/fstab: static file system information
-LABEL=var   /var   ext4   rw,nosuid,nodev,exec,relatime   0  0
