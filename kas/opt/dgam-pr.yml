@@ -8,4 +8,3 @@ local_conf_header:
     IOT2050_DOCKER_SUPPORT = "0"
     IMAGE_INSTALL:append = " kubesolo"
     IMAGE_INSTALL:append = " kubectl"
-    IMAGE_INSTALL += "iot2050-var-mount-override"
