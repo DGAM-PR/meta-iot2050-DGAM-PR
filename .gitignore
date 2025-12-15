@@ -3,4 +3,4 @@ isar/
 /cip-core
 .config.yaml*
 .kas_shell_history
-recipes-app/kubesolo/files/kubesolo-linux-arm64.zip
+meta/recipes-app/kubesolo/files/kubesolo-linux-arm64.zip
