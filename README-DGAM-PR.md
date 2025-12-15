@@ -93,8 +93,19 @@ Create a specific build for IOT2 that will run docker/kubesolo to manage it's co
 
 `./kas-container build kas-iot2050-swupdate.yml:./kas/opt/dgam-pr.yml`
 
-- See [kas/opt/dgam-pr.yml] (kas/opt/dgam-pr.yml) for the specifcs on what we disabe or install
-- See this directory for kubesolo .bb [Recipes-app/kubesolo](recipes-app/kubesolo)
+- See [kas/opt/dgam-pr.yml](kas/opt/dgam-pr.yml) for the specifics on what we disable or install
+- See [meta/recipes-app/kubesolo](meta/recipes-app/kubesolo) for the KubeSolo recipe
+- See [meta/recipes-app/kubectl](meta/recipes-app/kubectl) for the kubectl recipe
+
+### Recipe Location Requirements
+
+Custom recipes (kubesolo, kubectl) must be placed in a properly configured BitBake layer:
+- ✅ Correct: `meta/recipes-app/`
+- ❌ Incorrect: `recipes-app/` (root level - not in any layer)
+
+All recipes are located in the main `meta` layer under `meta/recipes-app/`:
+- [meta/recipes-app/kubesolo](meta/recipes-app/kubesolo) - KubeSolo recipe
+- [meta/recipes-app/kubectl](meta/recipes-app/kubectl) - kubectl recipe
 
 ### Filesystem Layout IOT2050
 KubeSolo needs to write to writable Overlay Directories only. This is why you need to install the exec during image build.
