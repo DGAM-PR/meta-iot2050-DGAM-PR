@@ -301,6 +301,9 @@ Specific Docs: https://docs.u-boot.org/en/latest/board/siemens/iot2050.html#
 
 ## IOT2050 Firmware Update – Short Procedure
 
+Everything to download can be found here: 
+https://support.industry.siemens.com/cs/document/109741799/downloads-for-simatic-iot20x0?dti=0&lc=en-WW
+
 #### Prerequisites
 
 - Service stick / example image for IOT2050  
