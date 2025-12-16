@@ -1,5 +1,7 @@
 build/
 isar/
-/cip-core
+cip-core/
 recipes-core/customizations-base/local.inc
 .config.yaml*
+.kas_shell_history
+recipes-app/kubesolo/files/kubesolo-linux-arm64.zip

@@ -1,0 +1,11 @@
+header:
+  version: 14
+
+local_conf_header:
+  minimal: |
+    IOT2050_NODE_RED_SUPPORT = "0"
+    IOT2050_DEBIAN_DEBUG_PACKAGES:remove = "mosquitto mosquitto-clients"
+    IOT2050_DOCKER_SUPPORT = "0"
+    IMAGE_INSTALL:append = " kubesolo"
+    IMAGE_INSTALL:append = " kubectl"
+    INITRAMFS_OVERLAY_MOUNT_OPTION = "defaults,nodev,nosuid"
