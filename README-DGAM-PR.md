@@ -307,7 +307,7 @@ https://support.industry.siemens.com/cs/document/109741799/downloads-for-simatic
 #### Prerequisites
 
 - Service stick / example image for IOT2050  
-- Firmware update files from Siemens:
+- Firmware update files from Siemens or from KAS buikd/tmp/deplpy/iot2050/ directory:
   - `iot2050-firmware-update_<version>_arm64.deb`
   - `IOT2050-FW-Update-PKG-V01.xx.xx-<hash>.tar.xz`  
 - Network access to a Debian mirror (for `apt`)
@@ -316,13 +316,10 @@ https://support.industry.siemens.com/cs/document/109741799/downloads-for-simatic
 
 ### 1. Prepare Files on the IOT2050
 
-On your PC, download the firmware update tool and package from Siemens, then copy them to the IOT2050, e.g. into `/root/firmware`:
+On your PC, download the firmware update tool and package from Siemens, then copy them to a USB Stick:
 
-```bash
-/root/firmware/
-  ├── iot2050-firmware-update_arm64.deb
-  └── IOT2050-FW-Update-PKG-V01.04.04-0-gd3b7b08.tar.xz
-```
+- A USB Stick only containing these files, not the same stick as the USB Stick you use to install service-stick siemens Indistrtial OS to eMMC.
+- Make sure to copy both the .deb and the .tar.xz from either your siemens download or your KAS buikd/tmp/deplpy/iot2050/ directory (this one is perfered as it fits the image you will eventually run)
 
 ---
 
@@ -346,8 +343,9 @@ On your PC, download the firmware update tool and package from Siemens, then cop
 2. Update package lists and install required packages:
 
 ```bash
-apt update
+apt update # Loads all the info (Do NOT apt Upgrade!)
 apt install python3-progress
+apt install python3-packages
 ```
 
 (Install additional dev / Python packages if required by your environment.)
@@ -358,26 +356,36 @@ apt install python3-progress
 
 Sometimes the BUILD_ID is missing, and the firmware update requires BUILD_ID derrived from /etc/os-release
 
-1. Check current firmware information (depending on image):
+> Note: The Siemens update script reads `BUILD_ID` (and possibly other keys) from `/etc/os-release`. Missing keys will cause a Python `KeyError`.
 
-```bash
-printfw firmware     # or:
-fw_printenv fw_version
-```
-
-2. Inspect `/etc/os-release`:
+0. Inspect `/etc/os-release`:
 
 ```bash
 cat /etc/os-release
 ```
 
-3. If the firmware update script expects keys like `BUILD_ID` and they are missing, add them (with the correct value as needed):
+If that file does not contain BUILD_ID, add it as follows below, else ignore the steps.
+
+1. Check current firmware information (depending on image):
 
 ```bash
-echo 'BUILD_ID=<expected_value>' >> /etc/os-release
+fw_printenv fw_version
+# Example output: fw_version=2025.04-V01.05.01-80-gfe007f1
 ```
 
-> Note: The Siemens update script reads `BUILD_ID` (and possibly other keys) from `/etc/os-release`. Missing keys will cause a Python `KeyError`.
+2. Export the trimmed variable
+
+```bash
+CURRENT_VER=$(fw_printenv fw_version | cut -d'-' -f2)
+```
+
+3. Add to /etc/os-release
+
+```bash
+echo "BUILD_ID=$CURRENT_VER" >> /etc/os-release
+```
+
+The file /etc/os-release should now hold the current firmware version in the form of BUILD_ID
 
 ---
 
