@@ -392,9 +392,13 @@ The file /etc/os-release should now hold the current firmware version in the for
 ### 5. Install Firmware Update Tool
 
 ```bash
-cd /root/firmware
+#Insert USB Stick that has the latest firmware files, mount it and copy it to ~
+mkdir /tmp/usb
+sudo mount /dev/sda1 /tmp/usb #could be sdb1 if you have both usb sticks plugged in
+cp -R /tmp/usb/firmware ./
+cd ~/firmware
 
-# Remove any old version (optional)
+# Remove any old version
 dpkg -r iot2050-firmware-update || true
 
 # Install new tool
@@ -404,22 +408,12 @@ apt -f install
 
 ---
 
-### 6. (Optional) Clean eMMC
+### 6. Run Firmware Update
 
-Only if required by your boot order / Siemens documentation (typically when changing from old images):
-
-```bash
-mkfs.ext4 /dev/mmcblk1
-```
-
----
-
-### 7. Run Firmware Update
-
-From `/root/firmware`:
+From `~/firmware/`
 
 ```bash
-iot2050-firmware-update IOT2050-FW-Update-PKG-V01.04.04-0-gd3b7b08.tar.xz
+iot2050-firmware-update IOT2050-FW-Update-PKG-<Your Versiom>
 ```
 
 During the process:
@@ -432,7 +426,7 @@ During the process:
 
 ---
 
-### 8. Verify Firmware Version
+### 7. Verify Firmware Version
 
 After reboot:
 
