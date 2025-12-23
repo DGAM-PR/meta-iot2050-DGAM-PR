@@ -319,7 +319,8 @@ https://support.industry.siemens.com/cs/document/109741799/downloads-for-simatic
 On your PC, download the firmware update tool and package from Siemens, then copy them to a USB Stick:
 
 - A USB Stick only containing these files, not the same stick as the USB Stick you use to install service-stick siemens Indistrtial OS to eMMC.
-- Make sure to copy both the .deb and the .tar.xz from either your siemens download or your KAS buikd/tmp/deplpy/iot2050/ directory (this one is perfered as it fits the image you will eventually run)
+- Make sure to copy both the .deb and the .tar.xz from either your siemens download or your KAS build/tmp/deplpy/iot2050/ directory (this one is perfered as it fits the image you will eventually run)
+  - Use the following standard example build to get the latest firmware files: `./kas-container build ./kas-iot2050-example.yml`
 
 ---
 
