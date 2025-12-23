@@ -414,7 +414,7 @@ apt -f install
 From `~/firmware/`
 
 ```bash
-iot2050-firmware-update IOT2050-FW-Update-PKG-<Your Versiom>
+iot2050-firmware-update IOT2050-FW-Update-PKG-<Your Version>
 ```
 
 During the process:
