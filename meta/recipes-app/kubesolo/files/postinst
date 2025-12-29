@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Create config directory
+mkdir -p /var/lib/kubesolo
+
+# Install default config file if it doesn't exist
+if [ ! -f /var/lib/kubesolo/config ]; then
+    cat > /var/lib/kubesolo/config << 'EOF'
+# Kubesolo Configuration
+# Uncomment and set these variables for the service to start
+
+# EDGE_ID=your-edge-id-here
+# EDGE_PORTAINER_KEY=your-base64-key-here
+EOF
+    chmod 600 /var/lib/kubesolo/config
+fi
+
+# Enable the service (it won't start until variables are set)
+systemctl enable kubesolo.service
+
+echo ""
+echo "================================================================"
+echo "Kubesolo service has been installed but NOT started."
+echo ""
+echo "To configure and start the service:"
+echo "  1. Edit /var/lib/kubesolo/config"
+echo "  2. Set EDGE_ID and EDGE_PORTAINER_KEY"
+echo "  3. Run: systemctl start kubesolo"
+echo ""
+echo "The service will retry every 60 seconds if configuration is invalid."
+echo "================================================================"
+echo ""

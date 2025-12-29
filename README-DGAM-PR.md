@@ -132,6 +132,68 @@ Filesystem Layout:
 └─────────────────────────────────────────┘
 ```
 
+### KubeSolo Systemd Service
+
+The kubesolo service is automatically installed and configured to start on boot, but requires device-specific configuration before it will run successfully.
+
+#### Service Configuration
+
+The service is configured with:
+- **Configuration file**: `/var/lib/kubesolo/config`
+- **Service file**: `/usr/lib/systemd/system/kubesolo.service`
+- **Validation script**: `/usr/bin/kubesolo-prestart.sh`
+
+#### Automatic Retry Behavior
+
+If configuration is missing or invalid:
+1. ✅ Service retries every **60 seconds**
+2. ⚠️ After **5 failed attempts** in a **10-minute window**, systemd stops retrying
+3. 🛑 Service remains in failed state until configuration is provided or device is rebooted
+
+This prevents resource waste while allowing time for initial configuration.
+
+#### Per-Device Setup
+
+After deploying the OS image to each IOT2050 device, configure device-specific settings:
+
+```bash
+# Edit the configuration file
+vi /var/lib/kubesolo/config
+
+# Uncomment and set your device-specific values:
+EDGE_ID=device-001
+EDGE_PORTAINER_KEY=YmFzZTY0ZW5jb2RlZGtleQ==
+
+# Start the service
+systemctl start kubesolo
+
+# Check status
+systemctl status kubesolo
+```
+
+#### Configuration Details
+
+The service configuration includes:
+- **KUBECONFIG**: Set to `/var/lib/kubesolo/pki/admin/admin.kubeconfig`
+- **Required variables**: `EDGE_ID` and `EDGE_PORTAINER_KEY` must be set in `/var/lib/kubesolo/config`
+- **Network dependency**: Service starts after network is online
+
+#### Troubleshooting
+
+```bash
+# View service logs
+journalctl -u kubesolo -f
+
+# Check service status
+systemctl status kubesolo
+
+# Manually restart after configuration
+systemctl restart kubesolo
+
+# Reset failure counter (if service hit restart limit)
+systemctl reset-failed kubesolo
+```
+
 # IOT2050 SWUpdate Usage Guide
 
 ## Overview

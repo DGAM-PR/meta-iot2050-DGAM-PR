@@ -1,0 +1,30 @@
+[Unit]
+Description=Kubesolo Kubernetes Cluster
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Load environment variables from configuration file
+EnvironmentFile=/var/lib/kubesolo/config
+
+# Validate configuration before starting
+ExecStartPre=/usr/bin/kubesolo-prestart.sh
+
+# Main service executable with environment variables
+ExecStart=/usr/bin/kubesolo
+
+# Set kubeconfig location
+Environment="KUBECONFIG=/var/lib/kubesolo/pki/admin/admin.kubeconfig"
+
+# Restart configuration with exponential backoff
+Restart=on-failure
+RestartSec=60s
+
+# Limit restart attempts: 5 attempts in 10 minutes, then back off
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
