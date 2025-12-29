@@ -2,6 +2,8 @@
 Description=Kubesolo Kubernetes Cluster
 After=network-online.target
 Wants=network-online.target
+StartLimitIntervalSec=600
+StartLimitBurst=5
 
 [Service]
 Type=simple
@@ -21,10 +23,6 @@ Environment="KUBECONFIG=/var/lib/kubesolo/pki/admin/admin.kubeconfig"
 # Restart configuration with exponential backoff
 Restart=on-failure
 RestartSec=60s
-
-# Limit restart attempts: 5 attempts in 10 minutes, then back off
-StartLimitIntervalSec=600
-StartLimitBurst=5
 
 [Install]
 WantedBy=multi-user.target
