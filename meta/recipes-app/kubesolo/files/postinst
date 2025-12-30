@@ -9,8 +9,8 @@ if [ ! -f /var/lib/kubesolo/config ]; then
 # Kubesolo Configuration
 # Uncomment and set these variables for the service to start
 
-# EDGE_ID=your-edge-id-here
-# EDGE_PORTAINER_KEY=your-base64-key-here
+# KUBESOLO_PORTAINER_EDGE_ID=your-edge-id-here
+# KUBESOLO_PORTAINER_EDGE_KEY=your-base64-key-here
 EOF
     chmod 600 /var/lib/kubesolo/config
 fi

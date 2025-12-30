@@ -161,8 +161,8 @@ After deploying the OS image to each IOT2050 device, configure device-specific s
 vi /var/lib/kubesolo/config
 
 # Uncomment and set your device-specific values:
-EDGE_ID=device-001
-EDGE_PORTAINER_KEY=YmFzZTY0ZW5jb2RlZGtleQ==
+KUBESOLO_PORTAINER_EDGE_ID=device-001
+KUBESOLO_PORTAINER_EDGE_KEY=YmFzZTY0ZW5jb2RlZGtleQ==
 
 # Start the service
 systemctl start kubesolo
@@ -175,7 +175,7 @@ systemctl status kubesolo
 
 The service configuration includes:
 - **KUBECONFIG**: Set to `/var/lib/kubesolo/pki/admin/admin.kubeconfig`
-- **Required variables**: `EDGE_ID` and `EDGE_PORTAINER_KEY` must be set in `/var/lib/kubesolo/config`
+- **Required variables**: `KUBESOLO_PORTAINER_EDGE_ID` and `KUBESOLO_PORTAINER_EDGE_KEY` must be set in `/var/lib/kubesolo/config`
 - **Network dependency**: Service starts after network is online
 
 #### Troubleshooting
