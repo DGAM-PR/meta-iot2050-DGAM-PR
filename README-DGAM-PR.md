@@ -1,14 +1,14 @@
-# GDAM-PR Additional Info
+# DGAM-PR Additional Info
 
 - Added kas/opt/gdam-pr.yml
-- Use following command within this repo's highest directory dept
+- Use following command within this repo's highest directory depth
     - ` ./kas-container build kas-iot2050-swupdate.yml:./kas/opt/dgam-pr.yml`
 
 ## Copy via SCP from build server
 
 Hereby an example on how to copy the file from the buildserver to your machine over ssh:
 
-1. Create DIR on server you are gathering the foles on: `mkdir ~/images`
+1. Create DIR on server you are gathering the files on: `mkdir ~/images`
 2. Perform SSH Copy: `scp <username>@<buildserverip>:repos/meta-iot2050-DGAM-PR/build/tmp/deploy/images/iot2050/iot2050-image-swu-example-iot2050-debian-iot2050.{wic,swu} ~/images/` . You might have to put in your password for each file.
 3. Your files should be on the server or machine you ssh'd from
 
@@ -58,7 +58,7 @@ flowchart TD
 
 ## Location of build result
 
-Location of build results and what tehy entail:
+Location of build results and what they entail:
 
 ```
 build/
@@ -77,9 +77,9 @@ build/
 ## Flash to SD Card (or use Balena Etcher)
 sudo dd if=build/tmp/deploy/images/iot2050/iot2050-image-swu-example-iot2050-debian-iot2050.wic of=/dev/mmcblk0 bs=4M oflag=sync
 
-# Two Types of Images as per archictecture
+# Two Types of Images as per architecture
 
-See internal archiceture repo for more information.
+See internal architecture repo for more information.
 
 ## PLC Facing IOT1
 
@@ -206,7 +206,7 @@ File Extension	Purpose	When to Use
 
 ## Initial Installation
 
-1. Flash Sevice Stick image to sd card
+1. Flash Service Stick image to sd card
 2. Inject SD card into Siemens IOT2050 device, this should boot to linux
   1. Default Password is root/root
 3. In Linux mount /sda/sda1 to /tmp/usb
@@ -334,13 +334,13 @@ Mount your image locally by doing the following:
 1. Mount the Image: `sudo losetup -fP iot2050-image-swu-example-iot2050-advanced.wic`
 2. Check what loop was added, probably loop 0 by doing `lsblk`
 3. Create Dir to mount on `mkdir -p /mnt/yourimage`
-4. Mount the pratition you want to check: `sudo mount /dev/loop0p2 /mnt/yourimage`
+4. Mount the partition you want to check: `sudo mount /dev/loop0p2 /mnt/yourimage`
 5. Your Image is now mounted at `/mnt/yourimage`
 6. Cleanup by doing 
   - `sudo umount /dev/loop0p2 /mnt/yourimage`
   - `sudo losetup -d /dev/loop0`
 
-#### Clear/Clean the EMMC from IT2050
+#### Clear/Clean the EMMC from IOT2050
 
 1. Check the EMMC, should be 1 (0 = Flash) by `mmc list`
 2. Select EMMC 1 by `mmc dev 1`
@@ -369,7 +369,7 @@ https://support.industry.siemens.com/cs/document/109741799/downloads-for-simatic
 #### Prerequisites
 
 - Service stick / example image for IOT2050  
-- Firmware update files from Siemens or from KAS buikd/tmp/deplpy/iot2050/ directory:
+- Firmware update files from Siemens or from KAS build/tmp/deploy/iot2050/ directory:
   - `iot2050-firmware-update_<version>_arm64.deb`
   - `IOT2050-FW-Update-PKG-V01.xx.xx-<hash>.tar.xz`  
 - Network access to a Debian mirror (for `apt`)
@@ -380,8 +380,8 @@ https://support.industry.siemens.com/cs/document/109741799/downloads-for-simatic
 
 On your PC, download the firmware update tool and package from Siemens, then copy them to a USB Stick:
 
-- A USB Stick only containing these files, not the same stick as the USB Stick you use to install service-stick siemens Indistrtial OS to eMMC.
-- Make sure to copy both the .deb and the .tar.xz from either your siemens download or your KAS build/tmp/deplpy/iot2050/ directory (this one is perfered as it fits the image you will eventually run)
+- A USB Stick only containing these files, not the same stick as the USB Stick you use to install service-stick siemens Industrial OS to eMMC.
+- Make sure to copy both the .deb and the .tar.xz from either your siemens download or your KAS build/tmp/deploy/iot2050/ directory (this one is preferred as it fits the image you will eventually run)
   - Use the following standard example build to get the latest firmware files: `./kas-container build ./kas-iot2050-example.yml`
 
 ---
@@ -390,8 +390,8 @@ On your PC, download the firmware update tool and package from Siemens, then cop
 
 1. Boot the IOT2050 from the **service stick/example image**.
   0. Insert USB Stick
-  1. Interrupt the boot proces to get into u-boot upon starting the device
-  2. folowing commands
+  1. Interrupt the boot process to get into u-boot upon starting the device
+  2. following commands
     1. `setenv devnum 0` <- bootcmd_usb0=devnum=0; run usb_boot
     2. `run bootcmd_usb0` <- usb_boot=usb start; if usb dev ${devnum}; then devtype=usb; run scan_dev_for_boot_part; fi
 2. Use the menu to **install the OS to eMMC** (Advanced PG2).
