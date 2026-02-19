@@ -1,5 +1,5 @@
 #
-# Copyright (c) Siemens AG, 2019-2023
+# Copyright (c) Siemens AG, 2019-2026
 #
 # Authors:
 #  Le Jin <le.jin@siemens.com>
@@ -14,6 +14,8 @@ inherit image
 DESCRIPTION = "IOT2050 Debian Base Image"
 
 IMAGE_INSTALL += "${IOT2050_META_PACKAGES}"
+
+IMAGE_PREINSTALL += "libubootenv-tool"
 
 # Make the .wic.img symlink to the .wic file for better backward compatibility
 do_deploy() {
