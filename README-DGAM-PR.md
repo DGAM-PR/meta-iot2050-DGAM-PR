@@ -211,7 +211,7 @@ File Extension	Purpose	When to Use
   1. Default Password is root/root (Might have to change Password)
   2. If it does not boot from the SD Card do the following:
     1. Set Boot Target`load mmc 0:2 ${kernel_addr_r} linux.efi`
-    2. Boot from set Target`${kernel_addr_r}{fdtcontroladdr}` 
+    2. Boot from set Target`bootefi ${kernel_addr_r}{fdtcontroladdr}` 
 3. In Linux mount /sda/sda1 to /tmp/usb
 	1. Create Dir: `sudo mkdir -p /tmp/usb`
 	2. Mount Dir: `sudo mount -t ext4 /dev/sda1 /tmp/usb`
